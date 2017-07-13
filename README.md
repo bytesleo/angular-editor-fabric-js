@@ -1,6 +1,14 @@
-# A4
+# angular-editor-fabric-js
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+
+## Installation
+
+```bash
+git clone https://github.com/kevoj/angular-editor-fabric-js.git
+cd angular-editor-fabric-js
+npm i
+```
 
 ## Development server
 
