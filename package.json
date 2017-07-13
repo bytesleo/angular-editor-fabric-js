@@ -16,7 +16,6 @@
     "url": "git+https://github.com/kevoj/angular-editor-fabric-js"
   },
   "author": "Leonardo Rico Guevara (https://github.com/kevoj)",
-  "license": "MIT",
   "dependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
