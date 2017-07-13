@@ -1,6 +1,6 @@
 {
   "name": "angular-editor-fabric-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Drag and drop editor based on Fabricjs (Angular Cli)",
   "license": "MIT",
   "scripts": {
@@ -16,6 +16,15 @@
     "url": "git+https://github.com/kevoj/angular-editor-fabric-js"
   },
   "author": "Leonardo Rico Guevara (https://github.com/kevoj)",
+  "keywords": [
+    "kitchensink",
+    "canvas",
+    "angular",
+    "fabricjs",
+    "editor",
+    "images",
+    "fabric"
+  ],
   "dependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
