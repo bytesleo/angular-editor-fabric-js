@@ -1,0 +1,247 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h4>Project Name</h4>
+  </div>
+  <div class="col-lg-12">
+    <div class="row">
+      <div class="col-lg-12 text-right">
+        <button type="button" class="btn btn-default" (click)="rasterize();"><i class="fa fa-download" aria-hidden="true"></i> image</button>
+        <button type="button" class="btn btn-default" (click)="rasterizeSVG();"><i class="fa fa-download" aria-hidden="true"></i> SVG</button>
+        <button type="button" class="btn btn-default" (click)="saveCanvasToJSON();"><i class="fa fa-save" aria-hidden="true"></i> Save</button>
+        <button type="button" class="btn btn-default" (click)="loadCanvasFromJSON();"><i class="fa fa-save" aria-hidden="true"></i> Load</button>
+        <button type="button" class="btn btn-default" (click)="confirmClear();"><i class="fa fa-ban" aria-hidden="true"></i> Clean</button>
+      </div>
+    </div>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="col-lg-3">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Size</div>
+      <div class="panel-body">
+        <div class="input-group">
+          <input type="number" class="form-control" [(ngModel)]="size.width" (keyup)="changeSize()" />
+          <span class="input-group-addon" id="sizing-addon2">
+            <i class="fa fa-arrows-h" aria-hidden="true"></i>
+          </span>
+        </div>
+        <div class="input-group">
+          <input type="number" class="form-control" [(ngModel)]="size.height" (keyup)="changeSize()" />
+          <span class="input-group-addon" id="sizing-addon2">
+            <i class="fa fa-arrows-v" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Add text</div>
+      <div class="panel-body">
+        <div class="input-group">
+          <!-- <input type="text" class="form-control" [(ngModel)]="textString" (keyup)="changeText($event, textString)" /> -->
+          <input type="text" class="form-control" [(ngModel)]="textString" />
+          <span class="input-group-btn">
+            <button id="add-text" class="btn btn-default" title="Add text" (click)="addText()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Add images</div>
+      <div class="panel-body">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/example1.png">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/example2.png">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/example3.png">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/example4.png">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/_QR_.png">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/_CODEBAR_.png">
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Upload image</div>
+      <div class="panel-body text-center">
+        <img id="testImage" *ngIf="url" class="images-item-upload" [src]="url" (click)="addImageOnCanvas(url);" />
+        <input type='file' (change)="readUrl($event);">
+        <br/>
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default btn-xs" (click)="removeWhite(url);">
+              <i class="fa fa-times" aria-hidden="true"></i> Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Add figure</div>
+      <div class="panel-body text-center">
+        <div class="btn-group btn-group-vertical" role="group" aria-label="...">
+          <button type="button" class="btn btn-default" (click)="addFigure('rectangle');">Rectangle</button>
+          <button type="button" class="btn btn-default" (click)="addFigure('square');">Square</button>
+          <button type="button" class="btn btn-default" (click)="addFigure('triangle');">Triangle</button>
+          <button type="button" class="btn btn-default" (click)="addFigure('circle');">Circle</button>
+          <button type="button" class="btn btn-default" (click)="addFigure('line');">Line</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-lg-6">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <div class="col-lg-3">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Options</div>
+      <div class="panel-body text-center">
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button" class="btn btn-danger" [disabled]="!selected" (click)="removeSelected();"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-default" [disabled]="!selected" (click)="sendToBack();"><i class="fa fa-level-down" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-default" [disabled]="!selected" (click)="bringToFront();"><i class="fa fa-level-up" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Custom</div>
+      <div class="panel-body">
+
+        <div class="custom-item" *ngIf="selected  && selected.type == 'group'">
+          Group Selected
+        </div>
+
+        <div class="custom-item" *ngIf="!selected">
+          No items selected
+        </div>
+
+        <div class="custom-item" *ngIf="selected && selected.type != 'group'">
+          <div class="custom-item-title">Opacity</div>
+          <div class="custom-item-body">
+            <input type="range" [(ngModel)]="props.opacity" (change)="setOpacity()" /> {{props.opacity}}
+          </div>
+        </div>
+
+        <div class="custom-item" *ngIf="selected && textEditor || selected && figureEditor">
+          <div class="custom-item-title">Fill</div>
+          <div class="custom-item-body">
+            <input type="text" class="form-control" [(colorPicker)]="props.fill" [style.background]="props.fill" [value]="props.fill" (colorPickerChange)="setFill()"/>
+          </div>
+        </div>
+
+        <div class="custom-item" *ngIf="selected && textEditor">
+          <div class="custom-item-title">Font family</div>
+          <div class="custom-item-body">
+            <select [(ngModel)]="props.fontFamily" class="form-control" (change)="setFontFamily()">
+              <option value="arial">Arial</option>
+              <option value="helvetica" selected>Helvetica</option>
+              <option value="myriad pro">Myriad Pro</option>
+              <option value="delicious">Delicious</option>
+              <option value="verdana">Verdana</option>
+              <option value="georgia">Georgia</option>
+              <option value="courier">Courier</option>
+              <option value="comic sans ms">Comic Sans MS</option>
+              <option value="impact">Impact</option>
+              <option value="monaco">Monaco</option>
+              <option value="optima">Optima</option>
+              <option value="hoefler text">Hoefler Text</option>
+              <option value="plaster">Plaster</option>
+              <option value="engagement">Engagement</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="custom-item" *ngIf="selected && textEditor">
+          <div class="custom-item-title">Text Align</div>
+          <div class="custom-item-body text-center">
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default" [ngClass]="{'active': props.textAlign == 'left' }" (click)="setTextAlign('left')">
+                <i class="fa fa-align-left"></i>
+              </button>
+              <button type="button" class="btn btn-default" [ngClass]="{'active': props.textAlign == 'center' }" (click)="setTextAlign('center')">
+                <i class="fa fa-align-center"></i>
+              </button>
+              <button type="button" class="btn btn-default" [ngClass]="{'active': props.textAlign == 'right' }" (click)="setTextAlign('right')">
+                <i class="fa fa-align-right"></i>
+              </button>
+              <button type="button" class="btn btn-default" [ngClass]="{'active': props.textAlign == 'justify' }" (click)="setTextAlign('justify')">
+                <i class="fa fa-align-justify"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="custom-item" *ngIf="selected && textEditor">
+          <div class="custom-item-title">Style</div>
+          <div class="custom-item-body text-center">
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default btn-sm" [ngClass]="{'active': props.fontWeight }" (click)="setBold()">
+                <i class="fa fa-bold"></i>
+              </button>
+              <button type="button" class="btn btn-default btn-sm" [ngClass]="{'active': props.fontStyle }" (click)="setFontStyle()">
+                <i class="fa fa-italic"></i>
+              </button>
+              <button type="button" class="btn btn-default btn-sm" [ngClass]="{'active': hasTextDecoration('underline') }" (click)="setTextDecoration('underline')">
+                <i class="fa fa-underline"></i>
+              </button>
+              <button type="button" class="btn btn-default btn-sm" [ngClass]="{'active': hasTextDecoration('overline') }" (click)="setTextDecoration('overline')">
+                <i class="fa fa-underline fa-flip-vertical"></i>
+              </button>
+              <button type="button" class="btn btn-default btn-sm" [ngClass]="{'active': hasTextDecoration('line-through') }" (click)="setTextDecoration('line-through')">
+                <i class="fa fa-strikethrough"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="custom-item" *ngIf="selected && textEditor">
+          <div class="custom-item-title">Font Size</div>
+          <div class="custom-item-body">
+            <input type="range" [(ngModel)]="props.fontSize" (change)="setFontSize()" step="1" min="1" max="120" /> {{props.fontSize}}
+          </div>
+        </div>
+
+        <div class="custom-item" *ngIf="selected && textEditor">
+          <div class="custom-item-title">Line Height</div>
+          <div class="custom-item-body">
+            <input type="range" [(ngModel)]="props.lineHeight" (change)="setLineHeight()" step="0.1" min="0" max="10" /> {{props.lineHeight}}
+          </div>
+        </div>
+
+        <div class="custom-item" *ngIf="selected && textEditor">
+          <div class="custom-item-title">Char Spacing</div>
+          <div class="custom-item-body">
+            <input type="range" [(ngModel)]="props.charSpacing" (change)="setCharSpacing()" step="10" min="-200" max="800" /> {{props.charSpacing}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <button type="button" class="btn btn-default btn-sm" (click)='rasterizeJSON()'>
+          <i class="fa fa-refresh" aria-hidden="true"></i> Render to json
+        </button>
+      </div>
+      <div class="panel-body">
+        <pre>
+        {{json}}
+      </pre>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>
+<br/>
