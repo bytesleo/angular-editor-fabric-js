@@ -114,11 +114,17 @@ export class EditorComponent implements OnInit {
     // get references to the html canvas element & its context
 
     this.canvas.on('mouse:down', (e) => {
-      let canvasElement: any = document.getElementById('tcanvas');
+      // let canvasElement: any = document.getElementById('canvas');
       // console.log(canvasElement)
 
     });
 
+
+
+  }
+
+  cleanSelect() {
+    this.canvas.deactivateAllWithDispatch().renderAll();
   }
 
   /*------------------------Block elements------------------------*/
@@ -149,6 +155,7 @@ export class EditorComponent implements OnInit {
     this.canvas.add(textSample);
     this.canvas.item(this.canvas.item.length - 1).hasRotatingPoint = true;
     this.textString = '';
+    this.canvas.deactivateAllWithDispatch().renderAll();
   }
 
   changeText(event: any, value: string) {
@@ -182,10 +189,7 @@ export class EditorComponent implements OnInit {
       // change the size of the picture with this function
       // image.scale(getRandomNum(0.1, 0.25)).setCoords();
       this.canvas.add(image);
-        console.log(1)
-        this.canvas.deactivateAllWithDispatch().renderAll();
-
-      // this.canvas.add(image).renderAll().setActiveObject(image);
+      this.canvas.deactivateAllWithDispatch().renderAll();
     });
 
   }
@@ -209,6 +213,7 @@ export class EditorComponent implements OnInit {
         // change the size of the picture with this function
         // image.scale(getRandomNum(0.1, 0.25)).setCoords();
         this.canvas.add(image);
+        this.canvas.deactivateAllWithDispatch().renderAll();
       });
 
     }
@@ -265,6 +270,7 @@ export class EditorComponent implements OnInit {
         break;
     }
     this.canvas.add(add);
+    this.canvas.deactivateAllWithDispatch().renderAll();
   }
 
   /*------------------------Global actions for element------------------------*/
@@ -438,7 +444,7 @@ export class EditorComponent implements OnInit {
       // activeObject.opacity = 1;
     }
     else if (activeGroup) {
-      var objectsInGroup = activeGroup.getObjects();
+      let objectsInGroup = activeGroup.getObjects();
       this.canvas.discardActiveGroup();
       objectsInGroup.forEach((object) => {
         object.bringToFront();
@@ -455,7 +461,7 @@ export class EditorComponent implements OnInit {
       // activeObject.opacity = 1;
     }
     else if (activeGroup) {
-      var objectsInGroup = activeGroup.getObjects();
+      let objectsInGroup = activeGroup.getObjects();
       this.canvas.discardActiveGroup();
       objectsInGroup.forEach((object) => {
         object.sendToBack();
