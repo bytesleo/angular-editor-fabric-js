@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ColorPickerService} from 'angular2-color-picker';
 
-
 import 'fabric';
 declare const fabric: any;
 
@@ -16,6 +15,8 @@ export class EditorComponent implements OnInit {
   private canvas: any;
   private props: any = {
     canvasFill: '#ffffff',
+    canvasImage: '',
+    id: null,
     opacity: null,
     fill: null,
     fontSize: null,
@@ -53,32 +54,26 @@ export class EditorComponent implements OnInit {
       selectionBorderColor: 'blue'
     });
 
-
     this.canvas.on({
-      'object:moving': (e) => {
-
-      },
-      'object:modified': (e) => {
-
-      },
+      'object:moving': (e) => { },
+      'object:modified': (e) => { },
       'object:selected': (e) => {
 
         let selectedObject = e.target;
         this.selected = selectedObject
-        this.resetPanels();
         selectedObject.hasRotatingPoint = true;
         selectedObject.transparentCorners = false;
         // selectedObject.cornerColor = 'rgba(255, 87, 34, 0.7)';
 
-        console.log('->',selectedObject.type)
+        this.resetPanels();
 
         if (selectedObject.type !== 'group' && selectedObject) {
 
+          this.getId();
           this.getOpacity();
 
           switch (selectedObject.type) {
             case 'rect':
-            case 'line':
             case 'circle':
             case 'triangle':
               this.figureEditor = true;
@@ -99,9 +94,7 @@ export class EditorComponent implements OnInit {
               console.log('image');
               break;
           }
-
         }
-
       },
       'selection:cleared': (e) => {
         this.selected = null;
@@ -113,19 +106,11 @@ export class EditorComponent implements OnInit {
     this.canvas.setHeight(this.size.height);
 
     // get references to the html canvas element & its context
+    // this.canvas.on('mouse:down', (e) => {
+    // let canvasElement: any = document.getElementById('canvas');
+    // console.log(canvasElement)
+    // });
 
-    this.canvas.on('mouse:down', (e) => {
-      // let canvasElement: any = document.getElementById('canvas');
-      // console.log(canvasElement)
-
-    });
-
-
-
-  }
-
-  cleanSelect() {
-    this.canvas.deactivateAllWithDispatch().renderAll();
   }
 
   /*------------------------Block elements------------------------*/
@@ -140,9 +125,8 @@ export class EditorComponent implements OnInit {
   //Block "Add text"
 
   addText() {
-
-    let text = this.textString;
-    let textSample = new fabric.IText(text, {
+    let textString = this.textString;
+    let text = new fabric.IText(textString, {
       left: 10,
       top: 10,
       fontFamily: 'helvetica',
@@ -153,52 +137,37 @@ export class EditorComponent implements OnInit {
       fontWeight: '',
       hasRotatingPoint: true
     });
-    this.canvas.add(textSample);
-    this.canvas.item(this.canvas.item.length - 1).hasRotatingPoint = true;
+    this.extend(text, this.randomId());
+    this.canvas.add(text);
+    this.selectItemAfterAdded(text);
     this.textString = '';
-    this.canvas.deactivateAllWithDispatch().renderAll();
   }
-
-  changeText(event: any, value: string) {
-
-    let activeObject = this.canvas.getActiveObject();
-
-    if (activeObject && activeObject.type === 'text') {
-      activeObject.objectCaching = false;
-      activeObject.text = value;
-      this.canvas.renderAll();
-    }
-  };
 
   //Block "Add images"
 
   getImgPolaroid(event: any) {
-
     let el = event.target;
     fabric.Image.fromURL(el.src, (image) => {
       image.set({
-        name: 'image_2444555',
         left: 10,
         top: 10,
         angle: 0,
         padding: 10,
         cornersize: 10,
-        hasRotatingPoint: true
+        hasRotatingPoint: true,
+        peloas: 12
       });
       image.setWidth(150);
       image.setHeight(150);
-      // change the size of the picture with this function
-      // image.scale(getRandomNum(0.1, 0.25)).setCoords();
+      this.extend(image, this.randomId());
       this.canvas.add(image);
-      this.canvas.deactivateAllWithDispatch().renderAll();
+      this.selectItemAfterAdded(image);
     });
-
   }
 
   //Block "Upload Image"
 
   addImageOnCanvas(url) {
-
     if (url) {
       fabric.Image.fromURL(url, (image) => {
         image.set({
@@ -211,12 +180,10 @@ export class EditorComponent implements OnInit {
         });
         image.setWidth(200);
         image.setHeight(200);
-        // change the size of the picture with this function
-        // image.scale(getRandomNum(0.1, 0.25)).setCoords();
+        this.extend(image, this.randomId());
         this.canvas.add(image);
-        this.canvas.deactivateAllWithDispatch().renderAll();
+        this.selectItemAfterAdded(image);
       });
-
     }
   }
 
@@ -237,7 +204,6 @@ export class EditorComponent implements OnInit {
   //Block "Add figure"
 
   addFigure(figure) {
-
     let add: any;
     switch (figure) {
       case 'rectangle':
@@ -262,25 +228,52 @@ export class EditorComponent implements OnInit {
           radius: 50, left: 10, top: 10, fill: '#ff5722'
         });
         break;
-      case 'line':
-        add = new fabric.Line([0, 0, 200, 0], {
-          left: 10,
-          top: 10,
-          stroke: '#2196f3'
-        });
-        break;
     }
+    this.extend(add, this.randomId());
     this.canvas.add(add);
-    this.canvas.deactivateAllWithDispatch().renderAll();
+    this.selectItemAfterAdded(add);
   }
 
   /*Canvas*/
 
-  setCanvasFill(){
+  cleanSelect() {
+    this.canvas.deactivateAllWithDispatch().renderAll();
+  }
 
-    this.canvas.backgroundColor = this.props.canvasFill;
-    this.canvas.renderAll();
-    // console.log(123);
+  selectItemAfterAdded(obj) {
+    this.canvas.deactivateAllWithDispatch().renderAll();
+    this.canvas.setActiveObject(obj);
+  }
+
+  setCanvasFill() {
+    if (!this.props.canvasImage) {
+      this.canvas.backgroundColor = this.props.canvasFill;
+      this.canvas.renderAll();
+    }
+  }
+
+  extend(obj, id) {
+    obj.toObject = (function(toObject) {
+      return function() {
+        return fabric.util.object.extend(toObject.call(this), {
+          id: id
+        });
+      };
+    })(obj.toObject);
+  }
+
+  setCanvasImage() {
+    let self = this;
+    if (this.props.canvasImage) {
+      this.canvas.setBackgroundColor({ source: this.props.canvasImage, repeat: 'repeat' }, function() {
+        // self.props.canvasFill = '';
+        self.canvas.renderAll();
+      });
+    }
+  }
+
+  randomId() {
+    return Math.floor(Math.random() * 999999) + 1;
   }
 
   /*------------------------Global actions for element------------------------*/
@@ -326,6 +319,51 @@ export class EditorComponent implements OnInit {
     if (!object) return;
     object.set(name, value).setCoords();
     this.canvas.renderAll();
+  }
+
+  clone() {
+    let activeObject = this.canvas.getActiveObject(),
+      activeGroup = this.canvas.getActiveGroup();
+
+    if (activeObject) {
+      let clone;
+      switch (activeObject.type) {
+        case 'rect':
+          clone = new fabric.Rect(activeObject.toObject());
+          break;
+        case 'circle':
+          clone = new fabric.Circle(activeObject.toObject());
+          break;
+        case 'triangle':
+          clone = new fabric.Triangle(activeObject.toObject());
+          break;
+        case 'i-text':
+          clone = new fabric.IText('', activeObject.toObject());
+          break;
+        case 'image':
+          clone = fabric.util.object.clone(activeObject);
+          break;
+      }
+      if (clone) {
+        clone.set({ left: 10, top: 10 });
+        this.canvas.add(clone);
+        this.selectItemAfterAdded(clone);
+      }
+    }
+  }
+
+  getId() {
+    this.props.id = this.canvas.getActiveObject().toObject().id;
+  }
+
+  setId() {
+    let val = this.props.id;
+    let complete = this.canvas.getActiveObject().toObject();
+    console.log(complete);
+    this.canvas.getActiveObject().toObject = () => {
+      complete.id = val;
+      return complete;
+    };
   }
 
   getOpacity() {
@@ -533,9 +571,7 @@ export class EditorComponent implements OnInit {
     this.json = JSON.stringify(this.canvas, null, 2);
   }
 
-
   resetPanels() {
-
     this.textEditor = false;
     this.imageEditor = false;
     this.figureEditor = false;
