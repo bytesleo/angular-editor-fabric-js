@@ -71,11 +71,7 @@ export class EditorComponent implements OnInit {
 
         console.log(selectedObject.type)
 
-        if (selectedObject.type === 'group') {
-
-
-
-        } else if (selectedObject) {
+        if (selectedObject.type !== 'group' && selectedObject) {
 
           this.getOpacity();
 
@@ -98,11 +94,8 @@ export class EditorComponent implements OnInit {
               this.getTextAlign();
               this.getFontFamily();
               break;
-            case 'group':
-              console.log('grupó');
-              break;
             case 'image':
-              console.log('grupó');
+              console.log('image');
               break;
           }
 
@@ -176,7 +169,7 @@ export class EditorComponent implements OnInit {
     let el = event.target;
     fabric.Image.fromURL(el.src, (image) => {
       image.set({
-        name : 'image_2444555',
+        name: 'image_2444555',
         left: 10,
         top: 10,
         angle: 0,
@@ -189,6 +182,9 @@ export class EditorComponent implements OnInit {
       // change the size of the picture with this function
       // image.scale(getRandomNum(0.1, 0.25)).setCoords();
       this.canvas.add(image);
+        console.log(1)
+        this.canvas.deactivateAllWithDispatch().renderAll();
+
       // this.canvas.add(image).renderAll().setActiveObject(image);
     });
 
@@ -214,6 +210,7 @@ export class EditorComponent implements OnInit {
         // image.scale(getRandomNum(0.1, 0.25)).setCoords();
         this.canvas.add(image);
       });
+
     }
   }
 
