@@ -1,5 +1,7 @@
 # angular-editor-fabric-js
 
+![](https://s1.gifgif.io/0qQV2a.gif)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
 ## Installation
