@@ -104,6 +104,7 @@
           <button type="button" class="btn btn-danger" [disabled]="!selected" (click)="removeSelected();"><i class="fa fa-trash" aria-hidden="true"></i></button>
           <button type="button" class="btn btn-default" [disabled]="!selected" (click)="sendToBack();"><i class="fa fa-level-down" aria-hidden="true"></i></button>
           <button type="button" class="btn btn-default" [disabled]="!selected" (click)="bringToFront();"><i class="fa fa-level-up" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-default" [disabled]="!selected" (click)="cleanSelect()"><i class="fa fa-remove" aria-hidden="true"></i></button>
         </div>
       </div>
     </div>
