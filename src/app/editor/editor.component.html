@@ -130,7 +130,7 @@
         <div class="custom-item" *ngIf="selected && textEditor || selected && figureEditor">
           <div class="custom-item-title">Fill</div>
           <div class="custom-item-body">
-            <input type="text" class="form-control" [(colorPicker)]="props.fill" [style.background]="props.fill" [value]="props.fill" (colorPickerChange)="setFill()"/>
+            <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="props.fill" [style.background]="props.fill" [value]="props.fill" (colorPickerChange)="setFill()"/>
           </div>
         </div>
 
