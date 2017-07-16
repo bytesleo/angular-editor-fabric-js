@@ -109,6 +109,18 @@
       </div>
     </div>
 
+    <div class="panel panel-default" *ngIf="!selected">
+      <div class="panel-heading">Canvas</div>
+      <div class="panel-body">
+        <div class="custom-item">
+          <div class="custom-item-title">Background</div>
+          <div class="custom-item-body">
+            <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="props.canvasFill" [style.background]="props.canvasFill" [value]="props.canvasFill" (colorPickerChange)="setCanvasFill()" />
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="panel panel-default">
       <div class="panel-heading">Custom</div>
       <div class="panel-body">
@@ -131,7 +143,7 @@
         <div class="custom-item" *ngIf="selected && textEditor || selected && figureEditor">
           <div class="custom-item-title">Fill</div>
           <div class="custom-item-body">
-            <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="props.fill" [style.background]="props.fill" [value]="props.fill" (colorPickerChange)="setFill()"/>
+            <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="props.fill" [style.background]="props.fill" [value]="props.fill" (colorPickerChange)="setFill()" />
           </div>
         </div>
 
