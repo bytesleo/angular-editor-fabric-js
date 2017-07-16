@@ -15,6 +15,7 @@ export class EditorComponent implements OnInit {
 
   private canvas: any;
   private props: any = {
+    canvasFill: '#ffffff',
     opacity: null,
     fill: null,
     fontSize: null,
@@ -69,7 +70,7 @@ export class EditorComponent implements OnInit {
         selectedObject.transparentCorners = false;
         // selectedObject.cornerColor = 'rgba(255, 87, 34, 0.7)';
 
-        console.log(selectedObject.type)
+        console.log('->',selectedObject.type)
 
         if (selectedObject.type !== 'group' && selectedObject) {
 
@@ -271,6 +272,15 @@ export class EditorComponent implements OnInit {
     }
     this.canvas.add(add);
     this.canvas.deactivateAllWithDispatch().renderAll();
+  }
+
+  /*Canvas*/
+
+  setCanvasFill(){
+
+    this.canvas.backgroundColor = this.props.canvasFill;
+    this.canvas.renderAll();
+    // console.log(123);
   }
 
   /*------------------------Global actions for element------------------------*/
