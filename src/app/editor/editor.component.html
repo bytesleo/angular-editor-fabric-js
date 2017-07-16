@@ -5,11 +5,11 @@
   <div class="col-lg-12">
     <div class="row">
       <div class="col-lg-12 text-right">
-        <button type="button" class="btn btn-default" (click)="rasterize();"><i class="fa fa-download" aria-hidden="true"></i> image</button>
-        <button type="button" class="btn btn-default" (click)="rasterizeSVG();"><i class="fa fa-download" aria-hidden="true"></i> SVG</button>
-        <button type="button" class="btn btn-default" (click)="saveCanvasToJSON();"><i class="fa fa-save" aria-hidden="true"></i> Save</button>
-        <button type="button" class="btn btn-default" (click)="loadCanvasFromJSON();"><i class="fa fa-save" aria-hidden="true"></i> Load</button>
-        <button type="button" class="btn btn-default" (click)="confirmClear();"><i class="fa fa-ban" aria-hidden="true"></i> Clean</button>
+        <button data-toggle="tooltip" data-placement="bottom" title="Export to image" type="button" class="btn btn-default" (click)="rasterize();"><i class="fa fa-download" aria-hidden="true"></i> image</button>
+        <button data-toggle="tooltip" data-placement="bottom" title="Export to SVG" type="button" class="btn btn-default" (click)="rasterizeSVG();"><i class="fa fa-download" aria-hidden="true"></i> SVG</button>
+        <button data-toggle="tooltip" data-placement="bottom" title="Save in localStorage" type="button" class="btn btn-default" (click)="saveCanvasToJSON();"><i class="fa fa-save" aria-hidden="true"></i> Save</button>
+        <button data-toggle="tooltip" data-placement="bottom" title="Load from localStorage" type="button" class="btn btn-default" (click)="loadCanvasFromJSON();"><i class="fa fa-save" aria-hidden="true"></i> Load</button>
+        <button data-toggle="tooltip" data-placement="bottom" title="Clean Canvas" type="button" class="btn btn-default" (click)="confirmClear();"><i class="fa fa-ban" aria-hidden="true"></i> Clean</button>
       </div>
     </div>
   </div>
@@ -40,10 +40,9 @@
       <div class="panel-heading">Add text</div>
       <div class="panel-body">
         <div class="input-group">
-          <!-- <input type="text" class="form-control" [(ngModel)]="textString" (keyup)="changeText($event, textString)" /> -->
           <input type="text" class="form-control" [(ngModel)]="textString" />
           <span class="input-group-btn">
-            <button id="add-text" class="btn btn-default" title="Add text" (click)="addText()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+            <button id="add-text" data-toggle="tooltip" data-placement="bottom" title="Add text" class="btn btn-default" title="Add text" (click)="addText()"><i class="fa fa-plus" aria-hidden="true"></i></button>
           </span>
         </div>
       </div>
@@ -51,13 +50,24 @@
 
     <div class="panel panel-default">
       <div class="panel-heading">Add images</div>
-      <div class="panel-body">
-        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/example1.png">
-        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/example2.png">
-        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/example3.png">
-        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/example4.png">
-        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/_QR_.png">
-        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/_CODEBAR_.png">
+      <div class="panel-body max-height">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/pikachu.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/squirtle.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/bullbasaur.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/charmander.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/bellsprout.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/caterpie.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/dratini.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/eevee.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/jigglypuff.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/mankey.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/meowth.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/pidgey.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/psyduck.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/rattata.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/abra.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/snorlax.svg">
+        <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/zubat.svg">
       </div>
     </div>
 
@@ -78,13 +88,12 @@
 
     <div class="panel panel-default">
       <div class="panel-heading">Add figure</div>
-      <div class="panel-body text-center">
+      <div class="panel-body text-center max-height">
         <div class="btn-group btn-group-vertical" role="group" aria-label="...">
           <button type="button" class="btn btn-default" (click)="addFigure('rectangle');">Rectangle</button>
           <button type="button" class="btn btn-default" (click)="addFigure('square');">Square</button>
           <button type="button" class="btn btn-default" (click)="addFigure('triangle');">Triangle</button>
           <button type="button" class="btn btn-default" (click)="addFigure('circle');">Circle</button>
-          <button type="button" class="btn btn-default" (click)="addFigure('line');">Line</button>
         </div>
       </div>
     </div>
@@ -101,10 +110,11 @@
       <div class="panel-heading">Options</div>
       <div class="panel-body text-center">
         <div class="btn-group" role="group" aria-label="...">
-          <button type="button" class="btn btn-danger" [disabled]="!selected" (click)="removeSelected();"><i class="fa fa-trash" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-default" [disabled]="!selected" (click)="sendToBack();"><i class="fa fa-level-down" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-default" [disabled]="!selected" (click)="bringToFront();"><i class="fa fa-level-up" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-default" [disabled]="!selected" (click)="cleanSelect()"><i class="fa fa-remove" aria-hidden="true"></i></button>
+          <button data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-danger" [disabled]="!selected" (click)="removeSelected();"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          <button data-toggle="tooltip" data-placement="bottom" title="Send to back" type="button" class="btn btn-default" [disabled]="!selected" (click)="sendToBack();"><i class="fa fa-level-down" aria-hidden="true"></i></button>
+          <button data-toggle="tooltip" data-placement="bottom" title="Send to front" type="button" class="btn btn-default" [disabled]="!selected" (click)="bringToFront();"><i class="fa fa-level-up" aria-hidden="true"></i></button>
+          <button data-toggle="tooltip" data-placement="bottom" title="Clone" type="button" class="btn btn-default" [disabled]="!selected || selected.type == 'group'" (click)="clone();"><i class="fa fa-clone" aria-hidden="true"></i></button>
+          <button data-toggle="tooltip" data-placement="bottom" title="Unselect" type="button" class="btn btn-default" [disabled]="!selected" (click)="cleanSelect()"><i class="fa fa-remove" aria-hidden="true"></i></button>
         </div>
       </div>
     </div>
@@ -112,10 +122,16 @@
     <div class="panel panel-default" *ngIf="!selected">
       <div class="panel-heading">Canvas</div>
       <div class="panel-body">
-        <div class="custom-item">
-          <div class="custom-item-title">Background</div>
+        <div class="custom-item" *ngIf="!props.canvasImage">
+          <div class="custom-item-title">Background Color</div>
           <div class="custom-item-body">
             <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="props.canvasFill" [style.background]="props.canvasFill" [value]="props.canvasFill" (colorPickerChange)="setCanvasFill()" />
+          </div>
+        </div>
+        <div class="custom-item">
+          <div class="custom-item-title">Background Image (url)</div>
+          <div class="custom-item-body">
+            <input type="text" class="form-control" placeholder="http://example.jpg" [(ngModel)]="props.canvasImage" (keyup)="setCanvasImage()" />
           </div>
         </div>
       </div>
@@ -131,6 +147,13 @@
 
         <div class="custom-item" *ngIf="!selected">
           No items selected
+        </div>
+
+        <div class="custom-item" *ngIf="selected && selected.type != 'group'">
+          <div class="custom-item-title">ID</div>
+          <div class="custom-item-body">
+            <input type="text" class="form-control" [(ngModel)]="props.id" (keyup)="setId()" />
+          </div>
         </div>
 
         <div class="custom-item" *ngIf="selected && selected.type != 'group'">
@@ -164,7 +187,7 @@
               <option value="optima">Optima</option>
               <option value="hoefler text">Hoefler Text</option>
               <option value="plaster">Plaster</option>
-              <option value="engagement">Engagement</option>
+              <!-- <option value="engagement">Engagement</option> -->
             </select>
           </div>
         </div>
