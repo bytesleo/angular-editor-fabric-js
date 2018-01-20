@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {ColorPickerService} from 'angular2-color-picker';
 
 import 'fabric';
 declare const fabric: any;
 
 @Component({
-  selector: 'app-editor',
-  templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.css']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 
-export class EditorComponent implements OnInit {
+export class AppComponent {
 
   private canvas: any;
   private props: any = {
@@ -43,7 +42,7 @@ export class EditorComponent implements OnInit {
   private figureEditor: boolean = false;
   private selected: any;
 
-  constructor(private cpService: ColorPickerService) { }
+  constructor() { }
 
   ngOnInit() {
 
@@ -112,6 +111,7 @@ export class EditorComponent implements OnInit {
     // });
 
   }
+
 
   /*------------------------Block elements------------------------*/
 
@@ -253,8 +253,8 @@ export class EditorComponent implements OnInit {
   }
 
   extend(obj, id) {
-    obj.toObject = (function(toObject) {
-      return function() {
+    obj.toObject = (function (toObject) {
+      return function () {
         return fabric.util.object.extend(toObject.call(this), {
           id: id
         });
@@ -265,7 +265,7 @@ export class EditorComponent implements OnInit {
   setCanvasImage() {
     let self = this;
     if (this.props.canvasImage) {
-      this.canvas.setBackgroundColor({ source: this.props.canvasImage, repeat: 'repeat' }, function() {
+      this.canvas.setBackgroundColor({ source: this.props.canvasImage, repeat: 'repeat' }, function () {
         // self.props.canvasFill = '';
         self.canvas.renderAll();
       });
@@ -477,7 +477,7 @@ export class EditorComponent implements OnInit {
       let objectsInGroup = activeGroup.getObjects();
       this.canvas.discardActiveGroup();
       let self = this;
-      objectsInGroup.forEach(function(object) {
+      objectsInGroup.forEach(function (object) {
         self.canvas.remove(object);
       });
     }
@@ -528,14 +528,25 @@ export class EditorComponent implements OnInit {
       alert('This browser doesn\'t provide means to serialize canvas to an image');
     }
     else {
-      window.open(this.canvas.toDataURL('png'));
+      console.log(this.canvas.toDataURL('png'))
+      //window.open(this.canvas.toDataURL('png'));
+      var image = new Image();
+      image.src = this.canvas.toDataURL('png')
+      var w = window.open("");
+      w.document.write(image.outerHTML);
     }
   }
 
   rasterizeSVG() {
-    window.open(
-      'data:image/svg+xml;utf8,' +
-      encodeURIComponent(this.canvas.toSVG()));
+    console.log(this.canvas.toSVG())
+    // window.open(
+    //   'data:image/svg+xml;utf8,' +
+    //   encodeURIComponent(this.canvas.toSVG()));
+    // console.log(this.canvas.toSVG())
+    // var image = new Image();
+    // image.src = this.canvas.toSVG()
+    var w = window.open("");
+    w.document.write(this.canvas.toSVG());
   };
 
 

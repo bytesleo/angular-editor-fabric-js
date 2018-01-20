@@ -1,22 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { CoreModule } from 'app/core/core.module';
-import { ShellComponent } from 'app/core/shell/shell.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
+import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
-    CoreModule,
-    HttpModule
+    ColorPickerModule
   ],
   providers: [],
-  bootstrap: [
-    ShellComponent
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
