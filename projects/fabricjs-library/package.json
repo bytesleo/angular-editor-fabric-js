@@ -1,0 +1,26 @@
+{
+  "name": "fabricjs-library",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^9.0.7",
+    "@angular/core": "^9.0.7",
+    "tslib": "^1.10.0",
+    "fabric": "^3.6.3"
+  },
+  "keywords": [
+    "kitchensink",
+    "kitchensink-angular",
+    "canvas",
+    "angular",
+    "fabricjs",
+    "editor",
+    "images",
+    "fabric",
+    "fabricjs-angular",
+    "angular-fabric"
+  ],
+  "whitelistedNonPeerDependencies": {
+    "fabric": "^3.6.3",
+    "@types/fabric": "^3.6.2"
+  }
+}
