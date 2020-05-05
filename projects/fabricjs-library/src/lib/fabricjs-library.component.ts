@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { fabric } from 'fabric';
+import { Canvas } from 'fabric/fabric-impl';
 
 @Component({
   selector: 'lib-fabricjs-library',
@@ -8,7 +9,7 @@ import { fabric } from 'fabric';
 })
 export class FabricjsLibraryComponent implements OnInit {
 
-  private canvas: any;
+  private canvas: fabric.Canvas;
   public props: any = {
     canvasFill: '#ffffff',
     canvasImage: '',
@@ -33,10 +34,10 @@ export class FabricjsLibraryComponent implements OnInit {
   };
 
   public json: any;
-  private globalEditor: boolean = false;
-  public textEditor: boolean = false;
-  private imageEditor: boolean = false;
-  public figureEditor: boolean = false;
+  private globalEditor = false;
+  public textEditor = false;
+  private imageEditor = false;
+  public figureEditor = false;
   public selected: any;
 
   constructor() { }
@@ -122,8 +123,8 @@ export class FabricjsLibraryComponent implements OnInit {
   // Block "Add text"
 
   addText() {
-    let textString = this.textString;
-    let text = new fabric.IText(textString, {
+    const textString = this.textString;
+    const text = new fabric.IText(textString, {
       left: 10,
       top: 10,
       fontFamily: 'helvetica',
@@ -143,7 +144,7 @@ export class FabricjsLibraryComponent implements OnInit {
   // Block "Add images"
 
   getImgPolaroid(event: any) {
-    let el = event.target;
+    const el = event.target;
     fabric.Image.fromURL(el.src, (image) => {
       image.set({
         left: 10,
@@ -186,10 +187,11 @@ export class FabricjsLibraryComponent implements OnInit {
 
   readUrl(event) {
     if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
+      const reader = new FileReader();
       reader.onload = () => {
         this.url = event.target.result;
-      }
+      };
+
       reader.readAsDataURL(event.target.files[0]);
     }
   }
@@ -250,19 +252,19 @@ export class FabricjsLibraryComponent implements OnInit {
   }
 
   extend(obj, id) {
-    obj.toObject = (function(toObject) {
+    obj.toObject = ((toObject) => {
       return function() {
         return fabric.util.object.extend(toObject.call(this), {
-          id: id
+          id
         });
       };
     })(obj.toObject);
   }
 
   setCanvasImage() {
-    let self = this;
+    const self = this;
     if (this.props.canvasImage) {
-      this.canvas.setBackgroundColor({ source: this.props.canvasImage, repeat: 'repeat' }, function () {
+      this.canvas.setBackgroundColor(new fabric.Pattern({ source: this.props.canvasImage, repeat: 'repeat' }), () => {
         // self.props.canvasFill = '';
         self.canvas.renderAll();
       });
@@ -290,7 +292,7 @@ export class FabricjsLibraryComponent implements OnInit {
     if (!object) { return; }
 
     if (object.setSelectionStyles && object.isEditing) {
-      var style = {};
+      const style = {};
       style[styleName] = value;
       object.setSelectionStyles(style);
       object.setCoords();
@@ -304,22 +306,22 @@ export class FabricjsLibraryComponent implements OnInit {
 
 
   getActiveProp(name) {
-    var object = this.canvas.getActiveObject();
+    const object = this.canvas.getActiveObject();
     if (!object) { return ''; }
 
     return object[name] || '';
   }
 
   setActiveProp(name, value) {
-    var object = this.canvas.getActiveObject();
+    const object = this.canvas.getActiveObject();
     if (!object) { return; }
     object.set(name, value).setCoords();
     this.canvas.renderAll();
   }
 
   clone() {
-    let activeObject = this.canvas.getActiveObjects();
-    let activeGroup = this.canvas.getActiveObject();
+    const activeObject = this.canvas.getActiveObject();
+    const activeGroup = this.canvas.getActiveObjects();
 
     if (activeObject) {
       let clone;
@@ -353,8 +355,8 @@ export class FabricjsLibraryComponent implements OnInit {
   }
 
   setId() {
-    let val = this.props.id;
-    let complete = this.canvas.getActiveObject().toObject();
+    const val = this.props.id;
+    const complete = this.canvas.getActiveObject().toObject();
     console.log(complete);
     this.canvas.getActiveObject().toObject = () => {
       complete.id = val;
@@ -367,7 +369,7 @@ export class FabricjsLibraryComponent implements OnInit {
   }
 
   setOpacity() {
-    this.setActiveStyle('opacity', parseInt(this.props.opacity) / 100, null);
+    this.setActiveStyle('opacity', parseInt(this.props.opacity, 10) / 100, null);
   }
 
   getFill() {
@@ -399,7 +401,7 @@ export class FabricjsLibraryComponent implements OnInit {
   }
 
   setFontSize() {
-    this.setActiveStyle('fontSize', parseInt(this.props.fontSize), null);
+    this.setActiveStyle('fontSize', parseInt(this.props.fontSize, 10), null);
   }
 
   getBold() {
@@ -428,9 +430,9 @@ export class FabricjsLibraryComponent implements OnInit {
   setTextDecoration(value) {
     let iclass = this.props.TextDecoration;
     if (iclass.includes(value)) {
-      iclass = iclass.replace(RegExp(value, "g"), "");
+      iclass = iclass.replace(RegExp(value, 'g'), '');
     } else {
-      iclass += ` ${value}`
+      iclass += ` ${value}`;
     }
     this.props.TextDecoration = iclass;
     this.setActiveStyle('textDecoration', this.props.TextDecoration, null);
@@ -462,50 +464,48 @@ export class FabricjsLibraryComponent implements OnInit {
 
 
   removeSelected() {
-    let activeObject = this.canvas.getActiveObjects();
-    let activeGroup = this.canvas.getActiveObject();
+    const activeObject = this.canvas.getActiveObject();
+    const activeGroup = this.canvas.getActiveObjects();
 
     if (activeObject) {
       this.canvas.remove(activeObject);
       // this.textString = '';
     } else if (activeGroup) {
-      let objectsInGroup = activeGroup.getObjects();
-      this.canvas.discardActiveGroup();
-      let self = this;
-      objectsInGroup.forEach(function (object) {
+      this.canvas.discardActiveObject();
+      const self = this;
+      activeGroup.forEach((object) => {
         self.canvas.remove(object);
       });
     }
   }
 
   bringToFront() {
-    let activeObject = this.canvas.getActiveObjects();
-    let activeGroup = this.canvas.getActiveObject();
+    const activeObject = this.canvas.getActiveObject();
+    const activeGroup = this.canvas.getActiveObjects();
 
     if (activeObject) {
       activeObject.bringToFront();
       // activeObject.opacity = 1;
     } else if (activeGroup) {
-      let objectsInGroup = activeGroup.getObjects();
-      this.canvas.discardActiveGroup();
-      objectsInGroup.forEach((object) => {
+      this.canvas.discardActiveObject();
+      activeGroup.forEach((object) => {
         object.bringToFront();
       });
     }
   }
 
   sendToBack() {
-    let activeObject = this.canvas.getActiveObjects();
-    let activeGroup = this.canvas.getActiveObject();
-    activeObject.preserveObjectStacking = true;
+    console.log('hello world')
+    const activeObject = this.canvas.getActiveObject();
+    const activeGroup = this.canvas.getActiveObjects();
 
     if (activeObject) {
+      this.canvas.sendToBack(activeObject);
       activeObject.sendToBack();
       activeObject.opacity = 1;
     } else if (activeGroup) {
-      let objectsInGroup = activeGroup.getObjects();
-      this.canvas.discardActiveGroup();
-      objectsInGroup.forEach((object) => {
+      this.canvas.discardActiveObject();
+      activeGroup.forEach((object) => {
         object.sendToBack();
       });
     }
@@ -520,32 +520,30 @@ export class FabricjsLibraryComponent implements OnInit {
   rasterize() {
     if (!fabric.Canvas.supports('toDataURL')) {
       alert('This browser doesn\'t provide means to serialize canvas to an image');
-    }
-    else {
-      console.log(this.canvas.toDataURL('png'));
+    } else {
+      console.log(this.canvas.toDataURL({format: 'png'}));
       // window.open(this.canvas.toDataURL('png'));
-      var image = new Image();
-      image.src = this.canvas.toDataURL('png');
-      let w = window.open('');
+      const image = new Image();
+      image.src = this.canvas.toDataURL({format: 'png'});
+      const w = window.open('');
       w.document.write(image.outerHTML);
     }
   }
 
   rasterizeSVG() {
-    console.log(this.canvas.toSVG())
+    console.log(this.canvas.toSVG());
     // window.open(
     //   'data:image/svg+xml;utf8,' +
     //   encodeURIComponent(this.canvas.toSVG()));
     // console.log(this.canvas.toSVG())
     // var image = new Image();
     // image.src = this.canvas.toSVG()
-    var w = window.open('');
+    const w = window.open('');
     w.document.write(this.canvas.toSVG());
-  };
-
+  }
 
   saveCanvasToJSON() {
-    let json = JSON.stringify(this.canvas);
+    const json = JSON.stringify(this.canvas);
     localStorage.setItem('Kanvas', json);
     console.log('json');
     console.log(json);
@@ -553,7 +551,7 @@ export class FabricjsLibraryComponent implements OnInit {
   }
 
   loadCanvasFromJSON() {
-    let CANVAS = localStorage.getItem('Kanvas');
+    const CANVAS = localStorage.getItem('Kanvas');
     console.log('CANVAS');
     console.log(CANVAS);
 
