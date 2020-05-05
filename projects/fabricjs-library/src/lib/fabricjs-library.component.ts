@@ -234,11 +234,11 @@ export class FabricjsLibraryComponent implements OnInit {
   /*Canvas*/
 
   cleanSelect() {
-    this.canvas.deactivateAllWithDispatch().renderAll();
+    this.canvas.discardActiveObject().renderAll();
   }
 
   selectItemAfterAdded(obj) {
-    this.canvas.deactivateAllWithDispatch().renderAll();
+    this.canvas.discardActiveObject().renderAll();
     this.canvas.setActiveObject(obj);
   }
 
@@ -318,8 +318,8 @@ export class FabricjsLibraryComponent implements OnInit {
   }
 
   clone() {
-    let activeObject = this.canvas.getActiveObject();
-    let activeGroup = this.canvas.getActiveGroup();
+    let activeObject = this.canvas.getActiveObjects();
+    let activeGroup = this.canvas.getActiveObject();
 
     if (activeObject) {
       let clone;
@@ -462,8 +462,8 @@ export class FabricjsLibraryComponent implements OnInit {
 
 
   removeSelected() {
-    let activeObject = this.canvas.getActiveObject();
-    let activeGroup = this.canvas.getActiveGroup();
+    let activeObject = this.canvas.getActiveObjects();
+    let activeGroup = this.canvas.getActiveObject();
 
     if (activeObject) {
       this.canvas.remove(activeObject);
@@ -479,8 +479,8 @@ export class FabricjsLibraryComponent implements OnInit {
   }
 
   bringToFront() {
-    let activeObject = this.canvas.getActiveObject();
-    let activeGroup = this.canvas.getActiveGroup();
+    let activeObject = this.canvas.getActiveObjects();
+    let activeGroup = this.canvas.getActiveObject();
 
     if (activeObject) {
       activeObject.bringToFront();
@@ -495,12 +495,13 @@ export class FabricjsLibraryComponent implements OnInit {
   }
 
   sendToBack() {
-    let activeObject = this.canvas.getActiveObject();
-    let activeGroup = this.canvas.getActiveGroup();
+    let activeObject = this.canvas.getActiveObjects();
+    let activeGroup = this.canvas.getActiveObject();
+    activeObject.preserveObjectStacking = true;
 
     if (activeObject) {
       activeObject.sendToBack();
-      // activeObject.opacity = 1;
+      activeObject.opacity = 1;
     } else if (activeGroup) {
       let objectsInGroup = activeGroup.getObjects();
       this.canvas.discardActiveGroup();
