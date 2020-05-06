@@ -27,7 +27,7 @@ export class FabricjsLibraryComponent implements OnInit {
   };
 
   public textString: string;
-  public url = '';
+  public url: string | ArrayBuffer = '';
   public size: any = {
     width: 500,
     height: 800
@@ -184,10 +184,9 @@ export class FabricjsLibraryComponent implements OnInit {
   readUrl(event) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
-      reader.onload = () => {
-        this.url = event.target.result;
+      reader.onload = (readerEvent) => {
+        this.url = readerEvent.target.result;
       };
-
       reader.readAsDataURL(event.target.files[0]);
     }
   }
@@ -481,7 +480,7 @@ export class FabricjsLibraryComponent implements OnInit {
 
     if (activeObject) {
       activeObject.bringToFront();
-      // activeObject.opacity = 1;
+      activeObject.opacity = 1;
     } else if (activeGroup) {
       this.canvas.discardActiveObject();
       activeGroup.forEach((object) => {
