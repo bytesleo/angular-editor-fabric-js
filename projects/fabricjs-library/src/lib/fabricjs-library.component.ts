@@ -60,7 +60,7 @@ export class FabricjsLibraryComponent implements OnInit {
         this.selected = selectedObject;
         selectedObject.hasRotatingPoint = true;
         selectedObject.transparentCorners = false;
-        // selectedObject.cornerColor = 'rgba(255, 87, 34, 0.7)';
+        selectedObject.cornerColor = 'rgba(255, 87, 34, 0.7)';
 
         this.resetPanels();
 
@@ -88,7 +88,6 @@ export class FabricjsLibraryComponent implements OnInit {
               this.getFontFamily();
               break;
             case 'image':
-              console.log('image');
               break;
           }
         }
@@ -103,10 +102,9 @@ export class FabricjsLibraryComponent implements OnInit {
     this.canvas.setHeight(this.size.height);
 
     // get references to the html canvas element & its context
-    // this.canvas.on('mouse:down', (e) => {
-    // let canvasElement: any = document.getElementById('canvas');
-    // console.log(canvasElement)
-    // });
+    this.canvas.on('mouse:down', (e) => {
+      const canvasElement: any = document.getElementById('canvas');
+    });
 
   }
 
@@ -145,7 +143,8 @@ export class FabricjsLibraryComponent implements OnInit {
 
   getImgPolaroid(event: any) {
     const el = event.target;
-    fabric.Image.fromURL(el.src, (image) => {
+    fabric.loadSVGFromURL(el.src, (objects, options) => {
+      const image = fabric.util.groupSVGElements(objects, options);
       image.set({
         left: 10,
         top: 10,
@@ -153,10 +152,7 @@ export class FabricjsLibraryComponent implements OnInit {
         padding: 10,
         cornerSize: 10,
         hasRotatingPoint: true,
-        // peloas: 12
       });
-      // image.setWidth(150);
-      // image.setHeight(150);
       this.extend(image, this.randomId());
       this.canvas.add(image);
       this.selectItemAfterAdded(image);
@@ -176,8 +172,8 @@ export class FabricjsLibraryComponent implements OnInit {
           cornerSize: 10,
           hasRotatingPoint: true
         });
-        // image.setWidth(200);
-        // image.setHeight(200);
+        image.scaleToWidth(200);
+        image.scaleToHeight(200);
         this.extend(image, this.randomId());
         this.canvas.add(image);
         this.selectItemAfterAdded(image);
@@ -265,7 +261,7 @@ export class FabricjsLibraryComponent implements OnInit {
     const self = this;
     if (this.props.canvasImage) {
       this.canvas.setBackgroundColor(new fabric.Pattern({ source: this.props.canvasImage, repeat: 'repeat' }), () => {
-        // self.props.canvasFill = '';
+        self.props.canvasFill = '';
         self.canvas.renderAll();
       });
     }
@@ -495,7 +491,6 @@ export class FabricjsLibraryComponent implements OnInit {
   }
 
   sendToBack() {
-    console.log('hello world')
     const activeObject = this.canvas.getActiveObject();
     const activeGroup = this.canvas.getActiveObjects();
 
@@ -532,12 +527,12 @@ export class FabricjsLibraryComponent implements OnInit {
 
   rasterizeSVG() {
     console.log(this.canvas.toSVG());
-    // window.open(
-    //   'data:image/svg+xml;utf8,' +
-    //   encodeURIComponent(this.canvas.toSVG()));
-    // console.log(this.canvas.toSVG())
-    // var image = new Image();
-    // image.src = this.canvas.toSVG()
+    window.open(
+      'data:image/svg+xml;utf8,' +
+      encodeURIComponent(this.canvas.toSVG()));
+    console.log(this.canvas.toSVG());
+    const image = new Image();
+    image.src = this.canvas.toSVG();
     const w = window.open('');
     w.document.write(this.canvas.toSVG());
   }
