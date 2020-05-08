@@ -121,22 +121,24 @@ export class FabricjsLibraryComponent implements OnInit {
   // Block "Add text"
 
   addText() {
-    const textString = this.textString;
-    const text = new fabric.IText(textString, {
-      left: 10,
-      top: 10,
-      fontFamily: 'helvetica',
-      angle: 0,
-      fill: '#000000',
-      scaleX: 0.5,
-      scaleY: 0.5,
-      fontWeight: '',
-      hasRotatingPoint: true
-    });
-    this.extend(text, this.randomId());
-    this.canvas.add(text);
-    this.selectItemAfterAdded(text);
-    this.textString = '';
+    if (this.textString) {
+      const text = new fabric.IText(this.textString, {
+        left: 10,
+        top: 10,
+        fontFamily: 'helvetica',
+        angle: 0,
+        fill: '#000000',
+        scaleX: 0.5,
+        scaleY: 0.5,
+        fontWeight: '',
+        hasRotatingPoint: true
+      });
+
+      this.extend(text, this.randomId());
+      this.canvas.add(text);
+      this.selectItemAfterAdded(text);
+      this.textString = '';
+    }
   }
 
   // Block "Add images"
