@@ -281,17 +281,58 @@ export class FabricjsLibraryComponent implements OnInit {
       : (object[styleName] || '');
   }
 
-
-  setActiveStyle(styleName, value, object) {
-    object = object || this.canvas.getActiveObject();
+  setActiveStyle(styleName, value: string | number, object: fabric.IText) {
+    object = object || this.canvas.getActiveObject() as fabric.IText;
     if (!object) { return; }
 
     if (object.setSelectionStyles && object.isEditing) {
       const style = {};
       style[styleName] = value;
+
+      if (typeof value === 'string') {
+        if (value.includes('underline')) {
+          object.setSelectionStyles({underline: true});
+        } else {
+          object.setSelectionStyles({underline: false});
+        }
+
+        if (value.includes('overline')) {
+          object.setSelectionStyles({overline: true});
+        } else {
+          object.setSelectionStyles({overline: false});
+        }
+
+        if (value.includes('line-through')) {
+          object.setSelectionStyles({linethrough: true});
+        } else {
+          object.setSelectionStyles({linethrough: false});
+        }
+      }
+
       object.setSelectionStyles(style);
       object.setCoords();
+
     } else {
+      if (typeof value === 'string') {
+        if (value.includes('underline')) {
+        object.set('underline', true);
+        } else {
+          object.set('underline', false);
+        }
+
+        if (value.includes('overline')) {
+          object.set('overline', true);
+        } else {
+          object.set('overline', false);
+        }
+
+        if (value.includes('line-through')) {
+          object.set('linethrough', true);
+        } else {
+          object.set('linethrough', false);
+        }
+      }
+
       object.set(styleName, value);
     }
 
@@ -436,7 +477,6 @@ export class FabricjsLibraryComponent implements OnInit {
   hasTextDecoration(value) {
     return this.props.TextDecoration.includes(value);
   }
-
 
   getTextAlign() {
     this.props.textAlign = this.getActiveProp('textAlign');
