@@ -554,16 +554,10 @@ export class FabricjsLibraryComponent implements OnInit {
   }
 
   rasterize() {
-    if (!fabric.Canvas.supports('toDataURL')) {
-      alert('This browser doesn\'t provide means to serialize canvas to an image');
-    } else {
-      console.log(this.canvas.toDataURL({format: 'png'}));
-      // window.open(this.canvas.toDataURL('png'));
-      const image = new Image();
-      image.src = this.canvas.toDataURL({format: 'png'});
-      const w = window.open('');
-      w.document.write(image.outerHTML);
-    }
+    const image = new Image();
+    image.src = this.canvas.toDataURL({format: 'png'});
+    const w = window.open('');
+    w.document.write(image.outerHTML);
   }
 
   rasterizeSVG() {
