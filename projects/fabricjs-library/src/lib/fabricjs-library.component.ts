@@ -567,15 +567,9 @@ export class FabricjsLibraryComponent implements OnInit {
   }
 
   rasterizeSVG() {
-    console.log(this.canvas.toSVG());
-    window.open(
-      'data:image/svg+xml;utf8,' +
-      encodeURIComponent(this.canvas.toSVG()));
-    console.log(this.canvas.toSVG());
-    const image = new Image();
-    image.src = this.canvas.toSVG();
     const w = window.open('');
     w.document.write(this.canvas.toSVG());
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(this.canvas.toSVG());
   }
 
   saveCanvasToJSON() {
