@@ -10,7 +10,7 @@ import { Canvas } from 'fabric/fabric-impl';
 export class FabricjsLibraryComponent implements OnInit {
 
   private canvas: fabric.Canvas;
-  public props: any = {
+  public props = {
     canvasFill: '#ffffff',
     canvasImage: '',
     id: null,
@@ -81,7 +81,6 @@ export class FabricjsLibraryComponent implements OnInit {
               this.getLineHeight();
               this.getCharSpacing();
               this.getBold();
-              this.getFontStyle();
               this.getFill();
               this.getTextDecoration();
               this.getTextAlign();
@@ -278,9 +277,11 @@ export class FabricjsLibraryComponent implements OnInit {
     object = object || this.canvas.getActiveObject();
     if (!object) { return ''; }
 
-    return (object.getSelectionStyles && object.isEditing)
-      ? (object.getSelectionStyles()[styleName] || '')
-      : (object[styleName] || '');
+    if (object.getSelectionStyles && object.isEditing) {
+      return (object.getSelectionStyles()[styleName] || '');
+    } else {
+      return (object[styleName] || '');
+    }
   }
 
   setActiveStyle(styleName, value: string | number, object: fabric.IText) {
@@ -451,15 +452,14 @@ export class FabricjsLibraryComponent implements OnInit {
     this.setActiveStyle('fontWeight', this.props.fontWeight ? 'bold' : '', null);
   }
 
-  getFontStyle() {
-    this.props.fontStyle = this.getActiveStyle('fontStyle', null);
-  }
-
   setFontStyle() {
     this.props.fontStyle = !this.props.fontStyle;
-    this.setActiveStyle('fontStyle', this.props.fontStyle ? 'italic' : '', null);
+    if (this.props.fontStyle) {
+      this.setActiveStyle('fontStyle', 'italic', null);
+    } else {
+      this.setActiveStyle('fontStyle', 'normal', null);
+    }
   }
-
 
   getTextDecoration() {
     this.props.TextDecoration = this.getActiveStyle('textDecoration', null);
