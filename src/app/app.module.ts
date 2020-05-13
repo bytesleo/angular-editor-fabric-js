@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { FabricjsLibraryModule } from 'projects/fabricjs-library/src/public-api';
+import { FormsModule } from '@angular/forms';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -11,6 +13,8 @@ import { FabricjsLibraryModule } from 'projects/fabricjs-library/src/public-api'
   imports: [
     BrowserModule,
     FabricjsLibraryModule,
+    FormsModule,
+    ColorPickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

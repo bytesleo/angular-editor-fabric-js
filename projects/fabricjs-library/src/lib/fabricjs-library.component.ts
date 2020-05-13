@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { fabric } from 'fabric';
-import { Canvas } from 'fabric/fabric-impl';
 
 @Component({
   selector: 'lib-fabricjs-library',

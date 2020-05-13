@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { FabricjsLibraryComponent } from 'fabricjs-library';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'fabricjs-editor';
+
+  @ViewChild('canvas', {static: false}) canvas: FabricjsLibraryComponent;
+
+  public removeSelected() {
+    this.canvas.removeSelected();
+  }
 }
