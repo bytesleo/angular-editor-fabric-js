@@ -126,46 +126,6 @@
         }
       }
     },
-    "fabricjs-lirbary": {
-      "projectType": "library",
-      "root": "projects/fabricjs-lirbary",
-      "sourceRoot": "projects/fabricjs-lirbary/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/fabricjs-lirbary/tsconfig.lib.json",
-            "project": "projects/fabricjs-lirbary/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/fabricjs-lirbary/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/fabricjs-lirbary/src/test.ts",
-            "tsConfig": "projects/fabricjs-lirbary/tsconfig.spec.json",
-            "karmaConfig": "projects/fabricjs-lirbary/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/fabricjs-lirbary/tsconfig.lib.json",
-              "projects/fabricjs-lirbary/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "fabricjs-library": {
       "projectType": "library",
       "root": "projects/fabricjs-library",

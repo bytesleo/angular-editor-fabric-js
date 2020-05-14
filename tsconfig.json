@@ -17,11 +17,10 @@
     ],
     "paths": {
       "fabricjs-library": [
-        "dist/fabricjs-library/fabricjs-library",
         "dist/fabricjs-library"
       ],
-      "os": [
-        "src/main.ts"
+      "fabricjs-library/*": [
+        "dist/fabricjs-library/*"
       ]
     }
   },
