@@ -15,17 +15,17 @@
       "es2018",
       "dom"
     ],
-    "paths": {
-      "angular-editor-fabric-js": [
-        "dist/angular-editor-fabric-js"
-      ],
-      "angular-editor-fabric-js/*": [
-        "dist/angular-editor-fabric-js/*"
-      ]
-    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
+  },
+  "paths": {
+    "angular-editor-fabric-js": [
+      "dist/angular-editor-fabric-js"
+    ],
+    "angular-editor-fabric-js/*": [
+      "dist/angular-editor-fabric-js/*"
+    ]
   }
 }

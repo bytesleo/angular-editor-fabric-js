@@ -1,15 +1,17 @@
 {
-  "name": "angular-editor-fabric-js",
-  "version": "0.0.0",
+  "name": "app-angular-editor-fabric-js",
+  "version": "0.0.3",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve angular-editor-fabric-js-app",
+    "build": "ng build angular-editor-fabric-js-app",
+    "build:lib": "ng-packagr -p projects/angular-editor-fabric-js/package.json",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "publish": "npm publish ./dist/angular-editor-fabric-js"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
+  "private": true,
   "dependencies": {
     "@angular/animations": "~9.0.6",
     "@angular/common": "~9.0.6",

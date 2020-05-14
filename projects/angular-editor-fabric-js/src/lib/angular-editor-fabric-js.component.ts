@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { fabric } from 'fabric';
 
 @Component({
-  selector: 'lib-angular-editor-fabric-js',
+  selector: 'angular-editor-fabric-js',
   templateUrl: 'angular-editor-fabric-js.component.html',
   styleUrls: ['angular-editor-fabric-js.component.css'],
 })
