@@ -1,5 +1,5 @@
 {
-  "name": "fabricjs-library",
+  "name": "angular-editor-fabric-js",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^9.0.7",

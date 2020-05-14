@@ -16,11 +16,11 @@
       "dom"
     ],
     "paths": {
-      "fabricjs-library": [
-        "dist/fabricjs-library"
+      "angular-editor-fabric-js": [
+        "dist/angular-editor-fabric-js"
       ],
-      "fabricjs-library/*": [
-        "dist/fabricjs-library/*"
+      "angular-editor-fabric-js/*": [
+        "dist/angular-editor-fabric-js/*"
       ]
     }
   },

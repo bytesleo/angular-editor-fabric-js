@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FabricjsLibraryComponent } from 'fabricjs-library';
+import { FabricjsLibraryComponent } from 'angular-editor-fabric-js';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import { FabricjsLibraryComponent } from 'fabricjs-library';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'fabricjs-editor';
+  title = 'angular-editor-fabric-js';
 
   @ViewChild('canvas', {static: false}) canvas: FabricjsLibraryComponent;
 

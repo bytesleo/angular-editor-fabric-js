@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FabricjsLibraryService } from './fabricjs-library.service';
+import { FabricjsLibraryService } from './angular-editor-fabric-js.service';
 
 describe('FabricjsLibraryService', () => {
   let service: FabricjsLibraryService;

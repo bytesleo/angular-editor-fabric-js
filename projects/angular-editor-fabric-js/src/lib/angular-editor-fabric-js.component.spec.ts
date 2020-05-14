@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FabricjsLibraryComponent } from './fabricjs-library.component';
+import { FabricjsLibraryComponent } from './angular-editor-fabric-js.component';
 
 describe('FabricjsLibraryComponent', () => {
   let component: FabricjsLibraryComponent;

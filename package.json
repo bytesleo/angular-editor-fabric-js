@@ -1,5 +1,5 @@
 {
-  "name": "fabricjs-editor",
+  "name": "angular-editor-fabric-js",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "dependencies": {
     "@angular/animations": "~9.0.6",
     "@angular/common": "~9.0.6",

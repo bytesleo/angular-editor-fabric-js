@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { fabric } from 'fabric';
 
 @Component({
-  selector: 'lib-fabricjs-library',
-  templateUrl: 'fabricjs-library.component.html',
-  styleUrls: ['fabricjs-library.component.css'],
+  selector: 'lib-angular-editor-fabric-js',
+  templateUrl: 'angular-editor-fabric-js.component.html',
+  styleUrls: ['angular-editor-fabric-js.component.css'],
 })
 export class FabricjsLibraryComponent implements OnInit {
 
