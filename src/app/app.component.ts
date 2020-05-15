@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FabricjsLibraryComponent } from 'angular-editor-fabric-js';
+import { FabricjsLibraryComponent } from 'projects/angular-editor-fabric-js/src/public-api';
 
 @Component({
   selector: 'app-root',
