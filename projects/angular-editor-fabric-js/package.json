@@ -1,6 +1,6 @@
 {
   "name": "angular-editor-fabric-js",
-  "version": "0.0.10",
+  "version": "3.0.0",
   "desription": "A FabricJS canvas editor for Angular",
   "dependencies": {
     "fabric": "^3.6.3",
