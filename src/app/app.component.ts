@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FabricjsLibraryComponent } from 'projects/angular-editor-fabric-js/src/public-api';
+import { FabricjsEditorComponent } from 'projects/angular-editor-fabric-js/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { FabricjsLibraryComponent } from 'projects/angular-editor-fabric-js/src/
 export class AppComponent {
   title = 'angular-editor-fabric-js';
 
-  @ViewChild('canvas', {static: false}) canvas: FabricjsLibraryComponent;
+  @ViewChild('canvas', {static: false}) canvas: FabricjsEditorComponent;
 
   public rasterize() {
     this.canvas.rasterize();

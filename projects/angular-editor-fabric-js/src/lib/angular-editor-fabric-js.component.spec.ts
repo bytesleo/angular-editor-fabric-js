@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FabricjsLibraryComponent } from './angular-editor-fabric-js.component';
+import { FabricjsEditorComponent } from './angular-editor-fabric-js.component';
 
 describe('FabricjsLibraryComponent', () => {
-  let component: FabricjsLibraryComponent;
-  let fixture: ComponentFixture<FabricjsLibraryComponent>;
+  let component: FabricjsEditorComponent;
+  let fixture: ComponentFixture<FabricjsEditorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FabricjsLibraryComponent ]
+      declarations: [ FabricjsEditorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FabricjsLibraryComponent);
+    fixture = TestBed.createComponent(FabricjsEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

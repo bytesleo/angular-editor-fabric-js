@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { fabric } from 'fabric';
 
 @Component({
@@ -6,7 +6,8 @@ import { fabric } from 'fabric';
   templateUrl: 'angular-editor-fabric-js.component.html',
   styleUrls: ['angular-editor-fabric-js.component.css'],
 })
-export class FabricjsLibraryComponent implements OnInit {
+export class FabricjsEditorComponent implements OnInit {
+  @ViewChild('htmlCanvas') htmlCanvas: ElementRef;
 
   private canvas: fabric.Canvas;
   public props = {
@@ -44,7 +45,7 @@ export class FabricjsLibraryComponent implements OnInit {
   ngOnInit() {
 
     // setup front side canvas
-    this.canvas = new fabric.Canvas('canvas', {
+    this.canvas = new fabric.Canvas(this.htmlCanvas.nativeElement, {
       hoverCursor: 'pointer',
       selection: true,
       selectionBorderColor: 'blue'

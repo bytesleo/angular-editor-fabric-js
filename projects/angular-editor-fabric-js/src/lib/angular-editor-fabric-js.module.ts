@@ -3,15 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ColorPickerModule } from 'ngx-color-picker';
 
-import { FabricjsLibraryComponent } from './angular-editor-fabric-js.component';
+import { FabricjsEditorComponent } from './angular-editor-fabric-js.component';
 
 @NgModule({
-  declarations: [FabricjsLibraryComponent],
+  declarations: [FabricjsEditorComponent],
   imports: [
     BrowserModule,
     FormsModule,
     ColorPickerModule
   ],
-  exports: [FabricjsLibraryComponent]
+  exports: [FabricjsEditorComponent]
 })
-export class FabricjsLibraryModule { }
+export class FabricjsEditorModule { }
