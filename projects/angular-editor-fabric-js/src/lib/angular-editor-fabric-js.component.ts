@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { fabric } from 'fabric';
 
 @Component({
   selector: 'angular-editor-fabric-js',
-  templateUrl: 'angular-editor-fabric-js.component.html',
-  styleUrls: ['angular-editor-fabric-js.component.css'],
+  templateUrl: './angular-editor-fabric-js.component.html',
+  styleUrls: ['./angular-editor-fabric-js.component.css'],
 })
-export class FabricjsEditorComponent implements OnInit {
+export class FabricjsEditorComponent implements AfterViewInit {
   @ViewChild('htmlCanvas') htmlCanvas: ElementRef;
 
   private canvas: fabric.Canvas;
@@ -42,7 +42,7 @@ export class FabricjsEditorComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
 
     // setup front side canvas
     this.canvas = new fabric.Canvas(this.htmlCanvas.nativeElement, {
