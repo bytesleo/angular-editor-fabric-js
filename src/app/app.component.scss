@@ -1,0 +1,45 @@
+.main-title{
+  margin-top: 10px;
+}
+.images-item {
+  width: 48%;
+  cursor: pointer;
+  -webkit-transition: .5s ease;
+  -webkit-transition: .5s ease;
+  padding: 3px;
+  max-width: 120px;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.images-item-upload {
+  width: 80%;
+  cursor: pointer;
+  padding-bottom: 10px;
+  -webkit-transition: .5s ease;
+  -webkit-transition: .5s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.custom-item {
+  border-bottom: 2px solid #f3f3f3;
+
+  .custom-item-title {
+    color: #666666;
+    font-weight: 600;
+  }
+
+  .custom-item-body {
+    padding: 10px 0;
+  }
+}
+
+.max-height{
+  overflow: auto;
+  max-height: 300px;
+}

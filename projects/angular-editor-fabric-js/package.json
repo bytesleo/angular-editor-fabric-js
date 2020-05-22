@@ -1,0 +1,39 @@
+{
+  "name": "angular-editor-fabric-js",
+  "version": "3.0.0",
+  "desription": "A FabricJS canvas editor for Angular",
+  "dependencies": {
+    "fabric": "^3.6.3",
+    "@types/fabric": "^3.6.2",
+    "ngx-color-picker": "^9.1.0"
+  },
+  "peerDependencies": {
+    "@angular/common": "^9.0.7",
+    "@angular/core": "^9.0.7",
+    "tslib": "^1.10.0"
+  },
+  "keywords": [
+    "kitchensink",
+    "kitchensink-angular",
+    "canvas",
+    "angular",
+    "fabricjs",
+    "editor",
+    "images",
+    "fabric",
+    "fabricjs-angular",
+    "angular-fabric"
+  ],
+  "ngPackage": {
+    "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+    "lib": {
+      "entryFile": "src/public-api.ts"
+    },
+    "dest": "../../dist/angular-editor-fabric-js",
+    "whitelistedNonPeerDependencies": [
+      "fabric",
+      "@types/fabric",
+      "ngx-color-picker"
+    ]
+  }
+}

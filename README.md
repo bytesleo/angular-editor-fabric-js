@@ -2,8 +2,6 @@
 
 > Drag-and-drop editor based on Fabricjs for Angular v5 with multiple options
 
-### Preview
-![](https://s1.gifgif.io/0qQV2a.gif)
 ### Example
 ![Imgur](https://i.imgur.com/sQsL8G4.png)
 ### Output
@@ -36,9 +34,15 @@
 * Line Height To Object
 * Char Spacing to Object
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.5.
+## Installing the library in your project
 
-## Installation
+```bash
+npm i angular-editor-fabric-js
+```
+
+# Development
+
+## Installing the project
 
 ```bash
 git clone https://github.com/kevoj/angular-editor-fabric-js.git
