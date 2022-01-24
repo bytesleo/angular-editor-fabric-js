@@ -9,7 +9,7 @@ import { FabricjsEditorComponent } from 'projects/angular-editor-fabric-js/src/p
 export class AppComponent {
   title = 'angular-editor-fabric-js';
 
-  @ViewChild('canvas', {static: false}) canvas: FabricjsEditorComponent;
+  @ViewChild('canvas', { static: false }) canvas: FabricjsEditorComponent;
 
   public rasterize() {
     this.canvas.rasterize();
@@ -137,5 +137,9 @@ export class AppComponent {
 
   public rasterizeJSON() {
     this.canvas.rasterizeJSON();
+  }
+
+  public drawMode() {
+    this.canvas.drawingMode();
   }
 }
