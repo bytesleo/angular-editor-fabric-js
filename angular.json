@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "angular-editor-fabric-js-app": {
@@ -165,6 +165,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-editor-fabric-js-app"
+    }
+  },
+  "defaultProject": "angular-editor-fabric-js-app",
+  "cli": {
+    "analytics": "45fc0ac5-6d55-4254-98db-3e87ba5a084f"
+  }
 }

@@ -48,7 +48,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.canvas = new fabric.Canvas(this.htmlCanvas.nativeElement, {
       hoverCursor: 'pointer',
       selection: true,
-      selectionBorderColor: 'blue'
+      selectionBorderColor: 'blue',
+      isDrawingMode: true
     });
 
     this.canvas.on({
@@ -602,6 +603,10 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.textEditor = false;
     this.imageEditor = false;
     this.figureEditor = false;
+  }
+
+  drawingMode(){
+    this.canvas.isDrawingMode = !this.canvas.isDrawingMode;
   }
 
 }
