@@ -1,6 +1,6 @@
 # angular-editor-fabric-js
 
-> Drag-and-drop editor based on Fabricjs for Angular v5 with multiple options
+> Drag-and-drop editor based on Fabricjs for Angular with multiple options
 
 ### Example
 ![Imgur](https://i.imgur.com/sQsL8G4.png)
@@ -67,4 +67,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 Before running the tests make sure you are serving the app via `ng serve`.
 
 ## License
-MIT © [Leonardo Rico](https://github.com/kevoj/angular-editor-fabric-js/blob/master/LICENSE)
+[MIT ©](https://github.com/kevoj/angular-editor-fabric-js/blob/master/LICENSE)
