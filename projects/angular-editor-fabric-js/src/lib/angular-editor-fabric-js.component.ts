@@ -559,12 +559,34 @@ export class FabricjsEditorComponent implements AfterViewInit {
     image.src = this.canvas.toDataURL({format: 'png'});
     const w = window.open('');
     w.document.write(image.outerHTML);
+    this.downLoadImage();
+  }
+
+  downLoadImage(){
+    const c = this.canvas.toDataURL({format: 'png'});
+    const downloadLink = document.createElement('a');
+    document.body.appendChild(downloadLink);
+    downloadLink.href = c;
+    downloadLink.target = '_self';
+    downloadLink.download = Date.now()+'.png';
+    downloadLink.click();   
   }
 
   rasterizeSVG() {
     const w = window.open('');
     w.document.write(this.canvas.toSVG());
+    this.downLoadSVG();
     return 'data:image/svg+xml;utf8,' + encodeURIComponent(this.canvas.toSVG());
+  }
+
+  downLoadSVG(){
+    const c = 'data:image/svg+xml;utf8,' + encodeURIComponent(this.canvas.toSVG());
+    const downloadLink = document.createElement('a');
+    document.body.appendChild(downloadLink);
+    downloadLink.href = c;
+    downloadLink.target = '_self';
+    downloadLink.download = Date.now()+'.svg';
+    downloadLink.click();   
   }
 
   saveCanvasToJSON() {
