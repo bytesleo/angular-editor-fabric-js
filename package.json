@@ -22,7 +22,7 @@
     "@angular/platform-browser-dynamic": "~9.1.7",
     "@angular/router": "~9.1.7",
     "bootstrap": "^4.4.1",
-    "fabric": "^3.6.6",
+    "fabric": "^5.2.4",
     "font-awesome": "^4.7.0",
     "ngx-color-picker": "^9.1.0",
     "rxjs": "~6.5.4",
