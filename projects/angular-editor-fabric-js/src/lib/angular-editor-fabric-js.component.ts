@@ -230,6 +230,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.selectItemAfterAdded(add);
   }
 
+  changeFigureColor(color) {
+    this.canvas.getActiveObject().set("fill", color);
+    this.canvas.renderAll();
+  };
+
   /*Canvas*/
 
   cleanSelect() {
@@ -250,7 +255,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   extend(obj, id) {
     obj.toObject = ((toObject) => {
-      return function() {
+      return function () {
         return fabric.util.object.extend(toObject.call(this), {
           id
         });
@@ -295,21 +300,21 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
       if (typeof value === 'string') {
         if (value.includes('underline')) {
-          object.setSelectionStyles({underline: true});
+          object.setSelectionStyles({ underline: true });
         } else {
-          object.setSelectionStyles({underline: false});
+          object.setSelectionStyles({ underline: false });
         }
 
         if (value.includes('overline')) {
-          object.setSelectionStyles({overline: true});
+          object.setSelectionStyles({ overline: true });
         } else {
-          object.setSelectionStyles({overline: false});
+          object.setSelectionStyles({ overline: false });
         }
 
         if (value.includes('line-through')) {
-          object.setSelectionStyles({linethrough: true});
+          object.setSelectionStyles({ linethrough: true });
         } else {
-          object.setSelectionStyles({linethrough: false});
+          object.setSelectionStyles({ linethrough: false });
         }
       }
 
@@ -319,7 +324,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
     } else {
       if (typeof value === 'string') {
         if (value.includes('underline')) {
-        object.set('underline', true);
+          object.set('underline', true);
         } else {
           object.set('underline', false);
         }
@@ -502,8 +507,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
 
   removeSelected() {
-    const activeObject:any = this.canvas.getActiveObject();
-    const activeGroup:any = this.canvas.getActiveObjects();
+    const activeObject: any = this.canvas.getActiveObject();
+    const activeGroup: any = this.canvas.getActiveObjects();
 
     if (activeObject && !activeObject._objects) {
       this.canvas.remove(activeObject);
@@ -556,20 +561,20 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   rasterize() {
     const image = new Image();
-    image.src = this.canvas.toDataURL({format: 'png'});
+    image.src = this.canvas.toDataURL({ format: 'png' });
     const w = window.open('');
     w.document.write(image.outerHTML);
     this.downLoadImage();
   }
 
-  downLoadImage(){
-    const c = this.canvas.toDataURL({format: 'png'});
+  downLoadImage() {
+    const c = this.canvas.toDataURL({ format: 'png' });
     const downloadLink = document.createElement('a');
     document.body.appendChild(downloadLink);
     downloadLink.href = c;
     downloadLink.target = '_self';
-    downloadLink.download = Date.now()+'.png';
-    downloadLink.click();   
+    downloadLink.download = Date.now() + '.png';
+    downloadLink.click();
   }
 
   rasterizeSVG() {
@@ -579,14 +584,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
     return 'data:image/svg+xml;utf8,' + encodeURIComponent(this.canvas.toSVG());
   }
 
-  downLoadSVG(){
+  downLoadSVG() {
     const c = 'data:image/svg+xml;utf8,' + encodeURIComponent(this.canvas.toSVG());
     const downloadLink = document.createElement('a');
     document.body.appendChild(downloadLink);
     downloadLink.href = c;
     downloadLink.target = '_self';
-    downloadLink.download = Date.now()+'.svg';
-    downloadLink.click();   
+    downloadLink.download = Date.now() + '.svg';
+    downloadLink.click();
   }
 
   saveCanvasToJSON() {
@@ -627,7 +632,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.figureEditor = false;
   }
 
-  drawingMode(){
+  drawingMode() {
     this.canvas.isDrawingMode = !this.canvas.isDrawingMode;
   }
 
