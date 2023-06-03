@@ -60,7 +60,6 @@ export class AppComponent {
   }
 
   public removeSelected() {
-    debugger;
     this.canvas.removeSelected();
   }
 
