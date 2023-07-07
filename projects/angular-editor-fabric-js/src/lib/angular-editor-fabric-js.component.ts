@@ -505,15 +505,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
     const activeObject = this.canvas.getActiveObject();
     const activeGroup = this.canvas.getActiveObjects();
 
-    if (activeObject) {
-      this.canvas.remove(activeObject);
-      // this.textString = '';
-    } else if (activeGroup) {
+    if (activeGroup) {
       this.canvas.discardActiveObject();
       const self = this;
       activeGroup.forEach((object) => {
         self.canvas.remove(object);
       });
+    } else if (activeObject) {
+      this.canvas.remove(activeObject);
     }
   }
 
@@ -559,12 +558,34 @@ export class FabricjsEditorComponent implements AfterViewInit {
     image.src = this.canvas.toDataURL({format: 'png'});
     const w = window.open('');
     w.document.write(image.outerHTML);
+    this.downLoadImage();
+  }
+
+  downLoadImage(){
+    const c = this.canvas.toDataURL({format: 'png'});
+    const downloadLink = document.createElement('a');
+    document.body.appendChild(downloadLink);
+    downloadLink.href = c;
+    downloadLink.target = '_self';
+    downloadLink.download = Date.now()+'.png';
+    downloadLink.click();   
   }
 
   rasterizeSVG() {
     const w = window.open('');
     w.document.write(this.canvas.toSVG());
+    this.downLoadSVG();
     return 'data:image/svg+xml;utf8,' + encodeURIComponent(this.canvas.toSVG());
+  }
+
+  downLoadSVG(){
+    const c = 'data:image/svg+xml;utf8,' + encodeURIComponent(this.canvas.toSVG());
+    const downloadLink = document.createElement('a');
+    document.body.appendChild(downloadLink);
+    downloadLink.href = c;
+    downloadLink.target = '_self';
+    downloadLink.download = Date.now()+'.svg';
+    downloadLink.click();   
   }
 
   saveCanvasToJSON() {
