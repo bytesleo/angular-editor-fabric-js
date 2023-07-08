@@ -90,10 +90,10 @@
           <div class="card">
               <div class="card-header">Add images</div>
               <div class="card-body max-height">
-                  <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/pikachu.svg">
-                  <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/squirtle.svg">
-                  <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/bullbasaur.svg">
-                  <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/charmander.svg">
+                  <img draggable="true" class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/pikachu.svg">
+                  <img draggable="true" class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/squirtle.svg">
+                  <img draggable="true" class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/bullbasaur.svg">
+                  <img draggable="true" class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/charmander.svg">
                   <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/bellsprout.svg">
                   <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/caterpie.svg">
                   <img class="images-item" (click)="getImgPolaroid($event)" src="../assets/img/dratini.svg">
@@ -146,7 +146,7 @@
               <div class="card-header">Options</div>
               <div class="card-body text-center">
                   <div class="btn-group" role="group" aria-label="...">
-                      <button data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-danger" [disabled]="!canvas.selected"
+                      <button data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-danger" 
                           (click)="removeSelected();">
                           <i class="fa fa-trash" aria-hidden="true"></i>
                       </button>
@@ -185,6 +185,12 @@
                       <div class="custom-item-body">
                           <input type="text" class="form-control" placeholder="http://example.jpg" [(ngModel)]="canvas.props.canvasImage" (keyup)="setCanvasImage()">
                       </div>
+                  </div>
+                  <div class="custom-item" *ngIf="!canvas.props.canvasImage">
+                    <div class="custom-item-title">Object Background</div>
+                    <div class="custom-item-body">
+                        <input type="color" class="form-control" (change)="onObjectColorChange($event)" value="#efefef">
+                    </div>
                   </div>
               </div>
           </div>
