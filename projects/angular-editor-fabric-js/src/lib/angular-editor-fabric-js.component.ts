@@ -510,15 +510,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
     const activeObject: any = this.canvas.getActiveObject();
     const activeGroup: any = this.canvas.getActiveObjects();
 
-    if (activeObject && !activeObject._objects) {
-      this.canvas.remove(activeObject);
-      // this.textString = '';
-    } else if (activeGroup) {
+    if (activeGroup) {
       this.canvas.discardActiveObject();
       const self = this;
       activeGroup.forEach((object) => {
         self.canvas.remove(object);
       });
+    } else if (activeObject) {
+      this.canvas.remove(activeObject);
     }
   }
 
