@@ -3,8 +3,8 @@
   "version": "3.0.0",
   "desription": "A FabricJS canvas editor for Angular",
   "dependencies": {
-    "fabric": "^3.6.3",
-    "@types/fabric": "^3.6.2",
+    "fabric": "^5.3.0",
+    "@types/fabric": "^5.3.4",
     "ngx-color-picker": "^9.1.0"
   },
   "peerDependencies": {
